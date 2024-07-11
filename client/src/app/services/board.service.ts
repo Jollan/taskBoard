@@ -4,6 +4,7 @@ import { JsonResponse } from '../models/metada';
 import { Board, IBoard } from '../models/board.model';
 import { Observable, map, merge, scan, shareReplay } from 'rxjs';
 import { ActionService } from './action.service';
+import { environment } from '../../environments/environment';
 
 type BoardResponse = JsonResponse<{
   board: Board;
@@ -28,20 +29,20 @@ export class BoardService {
 
   get(id: string) {
     return this.http.get<BoardResponse>(
-      `http://127.0.0.1:3000/api/v1/boards/${id}`
+      `${environment.api}/boards/${id}`
     );
   }
 
   create(board: IBoard) {
     return this.http.post<BoardResponse>(
-      `http://127.0.0.1:3000/api/v1/boards`,
+      `${environment.api}/boards`,
       board
     );
   }
 
   update(id: string, body: { name?: string; description?: string }) {
     return this.http.patch<BoardResponse>(
-      `http://127.0.0.1:3000/api/v1/boards/${id}`,
+      `${environment.api}/boards/${id}`,
       body
     );
   }
