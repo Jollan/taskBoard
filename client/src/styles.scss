@@ -1,0 +1,63 @@
+/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  min-height: 100vh;
+}
+
+body {
+  background-color: #f8fafc;
+  font-family: "Outfit", sans-serif;
+  :is(input, textarea, button) {
+    font-family: inherit;
+  }
+  .icon-wrapper {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    img {
+      height: 50%;
+    }
+  }
+  .icon-wrapper-inprogress {
+    background-color: #e9a23b;
+  }
+  .icon-wrapper-completed {
+    background-color: #32d657;
+  }
+  .icon-wrapper-wontdo {
+    background-color: #dd524c;
+  }
+  .inprogress {
+    background-color: #f5d565;
+    .icon-wrapper:last-child {
+      @extend .icon-wrapper-inprogress;
+    }
+  }
+  .completed {
+    background-color: #a0ecb1;
+    .icon-wrapper:last-child {
+      @extend .icon-wrapper-completed;
+    }
+  }
+  .wontdo {
+    background-color: #f7d4d3;
+    .icon-wrapper:last-child {
+      @extend .icon-wrapper-wontdo;
+    }
+  }
+  .todo {
+    background-color: #00000033;
+  }
+}
+

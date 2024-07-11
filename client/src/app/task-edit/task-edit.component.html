@@ -1,0 +1,117 @@
+<div class="container" *let="{ show: false } as modal">
+  <form class="wrapper" (ngSubmit)="onFormSubmitted()" #form="ngForm">
+    <div class="head">
+      <span class="title">Task details</span>
+      <div
+        class="close icon-wrapper"
+        (click)="editMode.emit(false); form.reset(task ?? default)"
+      >
+        <img src="close.svg" alt="close-icon" />
+      </div>
+    </div>
+    <div class="input-zones">
+      <div class="zone text-inputs">
+        <div class="task name">
+          <label class="label" for="name">Task name</label>
+          <input
+            name="name"
+            type="text"
+            id="name"
+            placeholder="Enter a name"
+            required
+            maxlength="30"
+            ngModel
+          />
+        </div>
+        <div class="task desc">
+          <label class="label" for="desc">Description</label>
+          <textarea
+            name="description"
+            id="desc"
+            placeholder="Enter a short description"
+            maxlength="100"
+            ngModel
+          ></textarea>
+        </div>
+      </div>
+      <div class="zone radio-inputs">
+        <div class="task icon">
+          <div class="label">Icon</div>
+          <div class="input">
+            @for (icon of icons; track $index) {
+            <input
+              name="icon"
+              type="radio"
+              [value]="icon"
+              [id]="$index"
+              hidden
+              ngModel
+            />
+            <label class="icon-wrapper" [for]="$index">
+              <span>{{ icon }}</span>
+              <img src="done.svg" alt="" />
+            </label>
+            }
+          </div>
+        </div>
+        <div class="task status">
+          <div class="label">Status</div>
+          <div
+            class="input"
+            *let="{
+              inprogress: 'In progress',
+              completed: 'Completed',
+              wontdo: 'Won\'t do',
+            } as $status"
+          >
+            @for (stat of status; track $index) { @if (stat !== 'todo') {
+            <input
+              name="status"
+              type="radio"
+              [value]="stat"
+              [id]="stat"
+              hidden
+              ngModel
+            />
+            <label class="status-wrapper" [for]="stat">
+              <div class="icon-wrapper" [ngClass]="'icon-wrapper-' + stat">
+                <img [src]="stat + '.svg'" alt="" />
+              </div>
+              <p class="status-label">
+                {{ $status[stat] }}
+              </p>
+              <img src="done.svg" alt="" />
+            </label>
+            } }
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="foot">
+      <div class="buttons">
+        <button
+          type="button"
+          [disabled]="!boardId || !task"
+          (click)="modal.show = true"
+        >
+          Delete
+          <img src="trash.svg" alt="trash" />
+        </button>
+        <button
+          type="submit"
+          [disabled]="form.pristine || form.invalid"
+          (click)="editMode.emit(false)"
+        >
+          Save
+          <img src="done.svg" alt="" />
+        </button>
+      </div>
+    </div>
+  </form>
+  <app-modal
+    *ngIf="modal.show"
+    (okay)="onDelete(); modal.show = false; editMode.emit(false)"
+    (cancel)="modal.show = false"
+    (click)="modal.show = false"
+  ></app-modal>
+</div>

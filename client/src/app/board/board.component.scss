@@ -1,0 +1,149 @@
+@import "../../partials/responsives";
+
+.container {
+  height: 95%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  top: 30px;
+  .wrapper {
+    width: 30rem;
+    @include mobile {
+      width: 23rem;
+    }
+    display: flex;
+    flex-direction: column;
+    .head {
+      position: sticky;
+      top: 0;
+      background-color: #f8fafc;
+      min-height: 110px;
+      padding: 10px 0;
+      display: flex;
+      flex-direction: column;
+      .first-line {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        .name {
+          position: relative;
+          font-size: 40px;
+          @include mobile {
+            font-weight: bold;
+            font-size: 30px;
+          }
+          input {
+            position: absolute;
+            top: -100px;
+            background-color: #f8fafc;
+            font-size: inherit;
+            @include mobile {
+              width: 80vw;
+            }
+            border: 0;
+            &.visible {
+              top: 0;
+            }
+            &:focus {
+              outline: 0;
+            }
+          }
+        }
+        .edit-button {
+          cursor: pointer;
+        }
+      }
+      .second-line {
+        display: flex;
+        justify-content: center;
+        .desc {
+          position: relative;
+          width: 80%;
+          font-size: small;
+          textarea {
+            width: 100%;
+            min-height: 100%;
+            position: absolute;
+            top: -200px;
+            resize: none;
+            background-color: #f8fafc;
+            border: 0;
+            &.visible {
+              top: 0;
+            }
+            &:focus {
+              outline: 0;
+            }
+            &::-webkit-scrollbar {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+    .content {
+      margin-bottom: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      .task {
+        padding: 10px;
+        border-radius: 10px;
+        display: flex;
+        gap: 10px;
+        cursor: pointer;
+        .icon-wrapper:first-child {
+          background-color: #f8fafc;
+        }
+        .task-text-zone {
+          width: 55%;
+          align-self: center;
+          &:has(.desc) {
+            padding: 10px 0;
+          }
+          .name {
+            font-weight: bold;
+          }
+          .desc {
+            margin-top: 5px;
+            font-size: small;
+          }
+        }
+        &:has(.icon-wrapper:last-child) .task-text-zone {
+          flex: 1;
+        }
+      }
+      .new {
+        background-color: #f5e8d5;
+        display: flex;
+        align-items: center;
+        .icon-wrapper {
+          background-color: #e9a23b !important;
+        }
+        .label {
+          font-size: smaller;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  .edit-form {
+    width: 40%;
+    height: 98%;
+    margin: 8px;
+    position: fixed;
+    top: 0;
+    right: -40%;
+    z-index: 999;
+    transition: all ease 0.5s;
+    @media (width <= 1024px) or (height <= 500px) {
+      width: 100%;
+      height: 100%;
+      margin: auto;
+      right: -100%;
+    }
+    &.active {
+      right: 0;
+    }
+  }
+}

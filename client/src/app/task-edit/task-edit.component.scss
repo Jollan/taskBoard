@@ -1,0 +1,154 @@
+@import "../../partials/responsives";
+
+%active {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #3662e3;
+  display: none;
+}
+.container {
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  background-color: #f8fafc;
+  border-radius: 10px;
+  @media (width <= 1024px) or (height <= 500px) {
+    border-radius: 0;
+  }
+  position: relative;
+  .wrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    .head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .icon-wrapper {
+        border: 1px solid #00000033;
+        background-color: #f8fafc;
+      }
+    }
+    .input-zones {
+      display: flex;
+      flex-direction: column;
+      @include mobileLandscape {
+        flex-direction: row;
+      }
+      flex-wrap: wrap;
+      gap: 15px;
+      .zone {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        flex: 1;
+        .task {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+          .label {
+            font-size: small;
+            color: #97a3b6;
+          }
+          &.icon {
+            .icon-wrapper {
+              position: relative;
+              background-color: #00000033;
+              img {
+                position: absolute;
+                @extend %active;
+              }
+            }
+            .icon-wrapper:nth-of-type(3) {
+              background-color: #f5d565;
+            }
+          }
+          &.name > input,
+          &.desc > textarea {
+            border: 1px solid #97a3b6;
+            padding: 10px;
+            border-radius: 5px;
+            &::placeholder {
+              color: #97a3b6;
+            }
+            &:focus {
+              outline: 1px solid #3662e3;
+            }
+            &#name.ng-touched.ng-invalid {
+              border: 1px solid #e74c3c;
+            }
+            &#desc {
+              resize: none;
+              height: 150px;
+            }
+          }
+          .input {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            & > input:checked + :is(.icon-wrapper, .status-wrapper) {
+              border: 2px solid #3662e3;
+              & > img {
+                display: flex;
+              }
+            }
+            .status-wrapper {
+              display: flex;
+              align-items: center;
+              gap: 10px;
+              width: 49%;
+              @include mobile {
+                width: 46%;
+              }
+              @include mobileLandscape {
+                width: 46%;
+              }
+              border-radius: 10px;
+              border: 2px solid #97a3b6;
+              padding: 1px;
+              cursor: pointer;
+              .status-label {
+                flex: 2;
+              }
+              & > img {
+                @extend %active;
+                margin-right: 5px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .foot {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: end;
+      .buttons {
+        width: inherit;
+        display: flex;
+        justify-content: flex-end;
+        gap: 15px;
+        height: 30px;
+        button {
+          padding: 0 20px;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          border: 0;
+          border-radius: 15px;
+          background-color: #3662e3;
+          color: #f8fafc;
+          cursor: pointer;
+          &:first-of-type {
+            background-color: #97a3b6;
+          }
+          &:disabled {
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,91 @@
+<app-loader *ngIf="!loaderService.fetched()"></app-loader>
+<div class="container">
+  <div class="wrapper">
+    <div class="head">
+      <div class="first-line" *let="{ editName: false } as mode">
+        <img class="logo" src="Logo.svg" alt="logo" />
+        <div class="name">
+          <input
+            name="name"
+            type="text"
+            id="name-input"
+            placeholder="Edit the name"
+            maxlength="20"
+            [ngClass]="{ visible: mode.editName }"
+            [(ngModel)]="board.name"
+            (blur)="onBoardEdited('name'); mode.editName = false"
+          />
+          <p>{{ board.name || "My Task Board" }}</p>
+        </div>
+        <label for="name-input" (click)="mode.editName = true">
+          <img class="edit-button" src="pencil.svg" alt="edit" />
+        </label>
+      </div>
+      <div class="second-line" *let="{ editDesc: false } as mode">
+        <div class="desc">
+          <textarea
+            name="description"
+            placeholder="Edit the description"
+            maxlength="200"
+            [ngClass]="{ visible: mode.editDesc }"
+            [(ngModel)]="board.description"
+            (blur)="onBoardEdited('description'); mode.editDesc = false"
+            #desc
+          ></textarea>
+          <p (click)="mode.editDesc = true; desc.focus()">
+            {{ board.description ?? "Tasks to keep organised" }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      @for (task of board.tasks; track $index) {
+      <div
+        class="task"
+        [ngClass]="task.status"
+        (click)="editMode = true; onEditMode($index)"
+      >
+        <div class="icon-wrapper">
+          <span>{{ task.icon }}</span>
+        </div>
+        <div class="task-text-zone">
+          <span class="name">{{ task.name }}</span>
+          <p class="desc" *ngIf="task.description as desc">
+            {{ desc }}
+          </p>
+        </div>
+        <div class="icon-wrapper" *ngIf="task.status !== 'todo'">
+          <img class="status" [src]="task.status + '.svg'" alt="" />
+        </div>
+      </div>
+      }
+      <div class="new task" (click)="editMode = true; onEditMode(-1)">
+        <div class="icon-wrapper">
+          <img class="add" src="add.svg" alt="new-task-icon" />
+        </div>
+        <span class="label">Add new task</span>
+      </div>
+    </div>
+  </div>
+  <div class="edit-form" [ngClass]="{ active: editMode }">
+    <app-task-edit
+      [boardId]="id"
+      [task]="task"
+      (editMode)="editMode = $event"
+      (newTask)="onFirstChange($event)"
+      #edit
+    ></app-task-edit>
+  </div>
+</div>
+@if (alertService.message() && hideSnackbar()) {
+<ng-container *let="alertService.message() as message">
+  <app-snackbar
+    [message]="message.content"
+    [type]="message.type"
+  ></app-snackbar>
+</ng-container>
+}
+<app-dimmer
+  *ngIf="editMode"
+  (click)="editMode = false; edit.form.reset(task ?? edit.default)"
+></app-dimmer>
