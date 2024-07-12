@@ -49,7 +49,6 @@
             />
             <label class="icon-wrapper" [for]="$index">
               <span>{{ icon }}</span>
-              <img src="done.svg" alt="" />
             </label>
             }
           </div>
@@ -91,8 +90,9 @@
     <div class="foot">
       <div class="buttons">
         <button
+          class="delete"
           type="button"
-          [disabled]="!boardId || !task"
+          *ngIf="boardId && task"
           (click)="modal.show = true"
         >
           Delete

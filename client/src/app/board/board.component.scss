@@ -96,21 +96,17 @@
           background-color: #f8fafc;
         }
         .task-text-zone {
-          width: 55%;
+          flex: 1;
           align-self: center;
-          &:has(.desc) {
-            padding: 10px 0;
-          }
+          padding: 10px 0;
           .name {
             font-weight: bold;
           }
           .desc {
             margin-top: 5px;
             font-size: small;
+            white-space: pre-wrap;
           }
-        }
-        &:has(.icon-wrapper:last-child) .task-text-zone {
-          flex: 1;
         }
       }
       .new {
@@ -129,8 +125,8 @@
   }
   .edit-form {
     width: 40%;
-    height: 98%;
-    margin: 8px;
+    height: 100%;
+    padding: 5px;
     position: fixed;
     top: 0;
     right: -40%;
@@ -139,7 +135,7 @@
     @media (width <= 1024px) or (height <= 500px) {
       width: 100%;
       height: 100%;
-      margin: auto;
+      padding: 0;
       right: -100%;
     }
     &.active {

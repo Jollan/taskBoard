@@ -1,12 +1,5 @@
 @import "../../partials/responsives";
 
-%active {
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background-color: #3662e3;
-  display: none;
-}
 .container {
   width: 100%;
   height: 100%;
@@ -53,15 +46,7 @@
           }
           &.icon {
             .icon-wrapper {
-              position: relative;
               background-color: #00000033;
-              img {
-                position: absolute;
-                @extend %active;
-              }
-            }
-            .icon-wrapper:nth-of-type(3) {
-              background-color: #f5d565;
             }
           }
           &.name > input,
@@ -87,7 +72,10 @@
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            & > input:checked + :is(.icon-wrapper, .status-wrapper) {
+            & > input:checked + .icon-wrapper {
+              background-color: #f5d565;
+            }
+            & > input:checked + .status-wrapper {
               border: 2px solid #3662e3;
               & > img {
                 display: flex;
@@ -106,8 +94,12 @@
                 flex: 2;
               }
               & > img {
-                @extend %active;
+                width: 15px;
+                height: 15px;
+                border-radius: 50%;
+                background-color: #3662e3;
                 margin-right: 5px;
+                display: none;
               }
             }
           }
@@ -135,7 +127,7 @@
           background-color: #3662e3;
           color: #f8fafc;
           cursor: pointer;
-          &:first-of-type {
+          &.delete {
             background-color: #97a3b6;
           }
           &:disabled {

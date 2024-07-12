@@ -61,7 +61,7 @@ export class BoardComponent implements OnInit, OnDestroy {
       { name: "Task Won't Do", status: 'wontdo', icon: '☕', description: '' },
       {
         name: 'Task To Do',
-        description: `Work on a Challenge on devChallenges.io, learn TypeScript.`,
+        description: `Work on a Challenge on devChallenges.io,\n learn TypeScript.`,
         status: 'todo',
         icon: '📚',
       },
