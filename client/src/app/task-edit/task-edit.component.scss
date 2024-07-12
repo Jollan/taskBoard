@@ -97,13 +97,7 @@
               display: flex;
               align-items: center;
               gap: 10px;
-              width: 49%;
-              @include mobile {
-                width: 46%;
-              }
-              @include mobileLandscape {
-                width: 46%;
-              }
+              width: 48%;
               border-radius: 10px;
               border: 2px solid #97a3b6;
               padding: 1px;

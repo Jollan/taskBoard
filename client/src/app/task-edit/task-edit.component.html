@@ -56,33 +56,34 @@
         </div>
         <div class="task status">
           <div class="label">Status</div>
-          <div
-            class="input"
-            *let="{
+          <div class="input">
+            <ng-container
+              *let="{
               inprogress: 'In progress',
               completed: 'Completed',
               wontdo: 'Won\'t do',
             } as $status"
-          >
-            @for (stat of status; track $index) { @if (stat !== 'todo') {
-            <input
-              name="status"
-              type="radio"
-              [value]="stat"
-              [id]="stat"
-              hidden
-              ngModel
-            />
-            <label class="status-wrapper" [for]="stat">
-              <div class="icon-wrapper" [ngClass]="'icon-wrapper-' + stat">
-                <img [src]="stat + '.svg'" alt="" />
-              </div>
-              <p class="status-label">
-                {{ $status[stat] }}
-              </p>
-              <img src="done.svg" alt="" />
-            </label>
-            } }
+            >
+              @for (stat of status; track $index) { @if (stat !== 'todo') {
+              <input
+                name="status"
+                type="radio"
+                [value]="stat"
+                [id]="stat"
+                hidden
+                ngModel
+              />
+              <label class="status-wrapper" [for]="stat">
+                <div class="icon-wrapper" [ngClass]="'icon-wrapper-' + stat">
+                  <img [src]="stat + '.svg'" alt="" />
+                </div>
+                <p class="status-label">
+                  {{ $status[stat] }}
+                </p>
+                <img src="done.svg" alt="" />
+              </label>
+              } }
+            </ng-container>
           </div>
         </div>
       </div>
