@@ -14,7 +14,7 @@ const boardSchema = new mongoose_1.default.Schema({
     description: {
         type: String,
         trim: true,
-        maxlength: 100,
+        maxlength: 200,
     },
     tasks: [{ type: mongoose_1.default.Types.ObjectId, ref: "Task" }],
 }, { timestamps: true });

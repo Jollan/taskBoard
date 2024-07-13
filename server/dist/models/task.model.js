@@ -14,7 +14,7 @@ const taskSchema = new mongoose_1.default.Schema({
     description: {
         type: String,
         trim: true,
-        maxlength: 100,
+        maxlength: 200,
     },
     icon: {
         type: String,
