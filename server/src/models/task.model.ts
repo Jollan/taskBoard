@@ -21,7 +21,7 @@ const taskSchema = new mongoose.Schema<ITask>(
     description: {
       type: String,
       trim: true,
-      maxlength: 100,
+      maxlength: 200,
     },
     icon: {
       type: String,

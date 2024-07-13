@@ -17,7 +17,7 @@ const boardSchema = new mongoose.Schema<IBoard>(
     description: {
       type: String,
       trim: true,
-      maxlength: 100,
+      maxlength: 200,
     },
     tasks: [{ type: mongoose.Types.ObjectId, ref: "Task" }],
   },
