@@ -31,7 +31,7 @@ export class TaskEditComponent implements OnDestroy, OnChanges {
   readonly alertService = inject(AlertService);
   private readonly taskService = inject(TaskService);
   private readonly actionService = inject(ActionService);
-  
+
   private readonly subscription = new Subscription();
   private readonly errMsg = 'Something went wrong !';
 
@@ -57,11 +57,11 @@ export class TaskEditComponent implements OnDestroy, OnChanges {
   }
 
   onFormSubmitted() {
-    const task: ITask = this.form.value;
+    const value: ITask = this.form.value;
     if (this.boardId) {
       if (!this.task) {
         this.subscription.add(
-          this.taskService.create(this.boardId, task).subscribe({
+          this.taskService.create(this.boardId, value).subscribe({
             next: (response) => {
               this.actionService.action.next(response.data.task);
             },
@@ -81,7 +81,7 @@ export class TaskEditComponent implements OnDestroy, OnChanges {
         );
       } else {
         this.subscription.add(
-          this.taskService.update(this.task._id!, task).subscribe({
+          this.taskService.update(this.task._id!, value).subscribe({
             next: (response) => {
               this.actionService.action.next(response.data.task);
             },
@@ -100,8 +100,8 @@ export class TaskEditComponent implements OnDestroy, OnChanges {
           })
         );
       }
-      this.form.reset(this.default);
-    } else this.newTask.emit(task);
+    } else this.newTask.emit(value);
+    this.form.reset(this.task ?? this.default);
   }
 
   onDelete() {

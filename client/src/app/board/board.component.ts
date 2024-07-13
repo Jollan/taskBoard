@@ -15,6 +15,7 @@ import { LoaderComponent } from '../utils/loader/loader.component';
 import { LoaderService } from '../services/loader.service';
 import { AlertService } from '../services/alert.service';
 import { SnackbarComponent } from '../utils/snackbar/snackbar.component';
+import { cloneDeep } from 'lodash-es';
 
 type PartialMetadata = Partial<Metadata>;
 
@@ -71,7 +72,7 @@ export class BoardComponent implements OnInit, OnDestroy {
   private readonly errMsg = 'Something went wrong !';
   private taskIndex: number;
   private subscription = new Subscription();
-  private boardCopy = { ...this.board };
+  private boardCopy = cloneDeep(this.board);
   id: string | null;
   editMode = false;
   task: ITask | undefined;
@@ -81,8 +82,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     if (this.id) {
       this.boardService.get$(this.id).subscribe({
         next: (board) => {
-          this.board = board;
-          this.boardCopy = { ...board };
+          this.boardCopy = cloneDeep((this.board = board));
         },
         error: (error: any) => {
           this.alertService.message.set({
@@ -147,6 +147,7 @@ export class BoardComponent implements OnInit, OnDestroy {
           this.router.navigateByUrl(`/${response.data.board._id}`);
         },
         error: (error: any) => {
+          this.board = cloneDeep(this.boardCopy);
           this.alertService.message.set({
             content: error.error.message ?? this.errMsg,
             type: 'error',

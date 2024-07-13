@@ -1,20 +1,19 @@
 @import "../../../partials/responsives";
 
-.sb-container {
-  display: flex;
-  align-items: end;
-  justify-content: center;
-  .sb {
-    position: fixed;
-    bottom: 10px;
-    min-width: 23rem;
-    padding: 13px;
-    border-radius: 5px;
+.sb {
+  position: fixed;
+  left: 50%;
+  width: 368px;
+  margin-left: -184px;
+  bottom: 10px;
+  padding: 13px;
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.300);
+  z-index: 999;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  .text {
     font-weight: bold;
-    box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.300);
-    z-index: 999;
-    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-    animation: fadein 0.5s, fadeout 0.5s 2.5s;
   }
 }
 

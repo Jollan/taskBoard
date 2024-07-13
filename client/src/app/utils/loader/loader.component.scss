@@ -1,18 +1,19 @@
 @import "../../../partials/responsives";
 
 .loader {
+  position: fixed;
+  width: 100%;
   height: 3px;
-  // border-radius: 5px;
   background-color: #e5e7eb;
   overflow: hidden;
   .loader-bar {
     position: relative;
     width: 30%;
     height: 100%;
-    // border-radius: 5px;
+    border-radius: 5px;
     background-color: #3662e3;
     animation: slide .5s linear infinite;
-    -webkit-animation: slide .8s linear infinite;
+    -webkit-animation: slide .5s linear infinite;
   }
 }
 

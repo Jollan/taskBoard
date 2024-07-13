@@ -59,6 +59,9 @@
         .desc {
           position: relative;
           width: 80%;
+          @include mobile {
+            width: 70vw;
+          }
           font-size: small;
           textarea {
             width: 100%;
